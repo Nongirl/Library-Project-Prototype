@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Librarian Admin - DJMYSMNHS Library</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <div id="adminLoginBox" class="login-wrapper">
+    <div class="admin-login-card">
+      <div class="login-brand">
+        <span class="school-badge">DJMYSMNHS Library</span>
+        <h2>Librarian Log-In</h2>
+        <p>Authorized personnel only.</p>
+      </div>
+      
+      
+      <form id="librarianLoginForm">
+        <label for="adminUser">Username</label>
+        <input type="text" id="adminUser" placeholder="Enter username" required />
+
+        <label for="adminPass">Password</label>
+        <input type="password" id="adminPass" placeholder="Enter password" required />
+
+        <div class="login-actions">
+          <a href="../index.html" class="secondary-btn">Back to Student Page</a>
+          <button type="submit" class="primary-btn">Log In</button>
+        </div>
+      </form>
+      <p id="adminError" class="error-msg"></p>
+    </div>
+  </div>
+
+  
+  
+  <div id="adminDashboard" class="hidden">
+    
+    <div class="dashboard-wrapper">
+
+      <div class="dash-header">
+        
+        <div>
+          <span class="school-badge">Don Jose M. Ynares Sr. Memorial National High School</span>
+          
+          
+          <h1>Librarian Dashboard</h1>
+        </div>
+        
+        <div class="dash-header-actions">
+          <a href="../index.html" class="secondary-btn">Student Page</a>
+          <button class="danger-btn" onclick="logoutAdmin()">Log Out</button>
+          
+    </div>
+        
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <h4>Total Books</h4>
+          <p id="statTotalBooks">0</p>
+        </div>
+        
+        <div class="stat-box stat-green">
+          <h4>Available</h4>
+          <p id="statAvailable">0</p>
+        </div>
+        
+        <div class="stat-box stat-red">
+          <h4>Unavailable</h4>
+          <p id="statUnavailable">0</p>
+        </div>
+        
+        <div class="stat-box">
+          <h4>Student Visits</h4>
+          <p id="statTotalVisits">0</p>
+        </div>
+        
+        <div class="stat-box stat-amber">
+          <h4>Violations</h4>
+          <p id="statViolations">0</p>
+        </div>
+        
+      </div>
+
+      
+     
+      <div class="dash-tabs">
+        <button id="tabBtnBooks" class="tab-btn active" onclick="switchAdminTab('booksTab', 'tabBtnBooks')">Manage Books</button>
+        <button id="tabBtnVisits" class="tab-btn" onclick="switchAdminTab('visitsTab', 'tabBtnVisits')">Visits &amp; Violations</button>
+      </div>
+
+      <section id="booksTab">
+        
+        <div class="card">
+          <h3>Add New Book</h3>
+          <p class="card-subtitle">New books appear in the student catalog right away.</p>
+          <form id="addBookForm" class="inline-form">
+            <input type="text" id="bookTitle" placeholder="Book title *" required />
+            <input type="text" id="bookAuthor" placeholder="Author" />
+            <input type="number" id="bookYear" placeholder="Year" min="1000" max="2100" />
+            <select id="bookGenre" required>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Science">Science</option>
+              <option value="English, Filipino & Values">English, Filipino &amp; Values</option>
+              <option value="Technology & Computing">Technology &amp; Computing</option>
+              <option value="Business, Finance & Medicine">Business, Finance &amp; Medicine</option>
+              <option value="Religion & Christian Living">Religion &amp; Christian Living</option>
+              <option value="Fiction">Fiction</option>
+              <option value="Children & Young Readers">Children &amp; Young Readers</option>
+              <option value="Biography, Memoir & History">Biography, Memoir &amp; History</option>
+              <option value="Travel">Travel</option>
+              <option value="Other">Other</option>
+            </select>
+            <button type="submit" class="primary-btn">Add Book</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Book Inventory</h3>
+          <p class="card-subtitle">Toggle a book's availability or remove it from the list.</p>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>Year</th>
+                  <th>Genre</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminBookTable"></tbody>
+            </table>
+          </div>
+          
+        </div>
+        
+      </section>
+
+      <section id="visitsTab" class="hidden">
+        <div class="card">
+          <h3>Student Visit Records</h3>
+          <p class="card-subtitle">Every log-in submitted on the student page.</p>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date &amp; Time</th>
+                  <th>Student Name</th>
+                  <th>Grade</th>
+                  <th>Section</th>
+                </tr>
+              </thead>
+              <tbody id="visitsTable"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Record a Rule Violation</h3>
+          <p class="card-subtitle">Select the library rule that was broken.</p>
+          <form id="violationForm" class="inline-form">
+            <input type="text" id="violatorName" placeholder="Student name *" required />
+            <input type="text" id="violatorGradeSec" placeholder="Grade & section *" required />
+            <select id="ruleViolated" required></select>
+            <button type="submit" class="primary-btn">Save Violation</button>
+          </form>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Student</th>
+                  <th>Grade &amp; Section</th>
+                  <th>Rule Violated</th>
+                </tr>
+              </thead>
+              <tbody id="violationsTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <footer class="main-footer">
+    <p>Don Jose M. Ynares Sr. Memorial National High School &bull; Library Management System Prototype</p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

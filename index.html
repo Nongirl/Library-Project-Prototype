@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Library Portal - DJMYSMNHS</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER SECTION -->
+  <header class="main-header">
+    <div class="header-text">
+      <span class="school-badge">Don Jose M. Ynares Sr. Memorial National High School</span>
+      <h1 class="welcome-title">Welcome to the School Library</h1>
+      <p class="school-quote">"A room without books is like a body without a soul."</p>
+    </div>
+    <div class="school-logo">
+      <span>DJMYSMNHS<br><small>LIBRARY</small></span>
+    </div>
+  </header>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-buttons">
+        <button id="btnLoginSec" class="nav-btn active" onclick="showStudentSection('loginSection')">Student Log-In</button>
+        <button id="btnBrowseSec" class="nav-btn" onclick="showStudentSection('browseSection')">Book Browsing</button>
+        <a href="librarian/index.html" class="nav-btn admin-link">Librarian Admin</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- TOP SECTION: STUDENT LOGIN & RULES (Default View) -->
+  <section id="loginSection" class="top-container">
+    <div class="two-columns">
+      <!-- Left Side: Student Check-in Form -->
+      <div class="card">
+        <h3>Student Library Log-In</h3>
+        <p class="card-subtitle">Please register your visit upon entering the library.</p>
+        <form id="studentLoginForm">
+          <label for="studentName">Student Full Name *</label>
+          <input type="text" id="studentName" placeholder="e.g., Juan Dela Cruz" required />
+
+          <div class="row-inputs">
+            <div>
+              <label for="studentGrade">Grade Level *</label>
+              <select id="studentGrade" required>
+                <option value="">-- Select Grade --</option>
+                <option value="Grade 7">Grade 7</option>
+                <option value="Grade 8">Grade 8</option>
+                <option value="Grade 9">Grade 9</option>
+                <option value="Grade 10">Grade 10</option>
+                <option value="Grade 11">Grade 11</option>
+                <option value="Grade 12">Grade 12</option>
+              </select>
+            </div>
+            <div>
+              <label for="studentSection">Section *</label>
+              <input type="text" id="studentSection" placeholder="e.g., Einstein" required />
+            </div>
+          </div>
+
+          <div class="id-reminder">
+            Reminder: Present your valid School ID to the Librarian upon entry.
+          </div>
+          <button type="submit" class="primary-btn full-width">Submit Visit Log</button>
+        </form>
+        <p id="loginFeedback" class="feedback-msg"></p>
+      </div>
+
+      <!-- Right Side: Rules and Regulations -->
+      <div class="card">
+        <h3>Library Rules and Regulations</h3>
+        <p class="card-subtitle">All students must strictly follow these policies inside the library:</p>
+        <ol id="studentRulesList" class="rules-list">
+          <!-- Rules automatically load from JS for Proto.js -->
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOP SECTION ALTERNATIVE: BOOK BROWSING -->
+  <section id="browseSection" class="top-container hidden">
+    <div class="card">
+      <div class="section-header-flex">
+        <div>
+          <h3>Available Books Catalog</h3>
+          <p class="card-subtitle" id="catalogCountText">Showing all books (Room-use reading only)</p>
+        </div>
+        <button class="secondary-btn" onclick="showStudentSection('loginSection')">Back to Student Log-In</button>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="bookSearchInput" onkeyup="renderStudentBooks()" placeholder="Search by book title, author, or year..." />
+        <select id="genreFilterSelect" onchange="renderStudentBooks()">
+          <option value="All">All Genres</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="Science">Science</option>
+          <option value="English, Filipino & Values">English, Filipino & Values</option>
+          <option value="Technology & Computing">Technology & Computing</option>
+          <option value="Business, Finance & Medicine">Business, Finance & Medicine</option>
+          <option value="Religion & Christian Living">Religion & Christian Living</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Children & Young Readers">Children & Young Readers</option>
+          <option value="Biography, Memoir & History">Biography, Memoir & History</option>
+          <option value="Travel">Travel</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Year</th>
+              <th>Genre</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="studentBookTable">
+            <!-- Books load here from JS for Proto.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- SCHOOL AND LIBRARY BACKGROUND -->
+  <main class="info-container">
+    <div class="info-row">
+      <div class="pic-box">
+        <img src="library-pic.jpg" alt="Interior of the Don Jose M. Ynares Sr. Memorial National High School library" />
+        <p class="image-note">Photo of the school library.</p>
+      </div>
+      <div class="text-box">
+        <h3>About Our School Library</h3>
+        <p>
+          The library is one of the school's learning facilities where students can read, study, and use available learning materials. It provides a space for learners to spend time reading and to access books that can support their school activities and studies. The library also helps encourage students to develop their reading habits and become more independent learners.
+
+          This website prototype includes a book catalog where students can browse book titles and check their availability. It also includes a student visit log and a section for library rules and regulations. These features are intended to help organize basic library information and records.
+        </p>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="text-box">
+        <h3>School Background</h3>
+        <p>
+          Don Jose M. Ynares Sr. Memorial National High School is a public secondary school located in Barangay San Carlos, Binangonan, Rizal. It first opened in June 1998 as an annex of Vicente Madrigal National High School. It later became an independent school as the number of students increased. The school carries the motto "Dunong at Dangal," which means "Wisdom and Honor."
+        </p>
+        <p class="source-note">
+          Source: <a href="https://en.wikipedia.org/wiki/Don_Jose_M._Ynares_Sr._Memorial_National_High_School" target="_blank" rel="noopener noreferrer">School history page</a>
+        </p>
+      </div>
+      <div class="pic-box">
+        <img src="school-pic.webp" alt="Don Jose M. Ynares Sr. Memorial National High School building" />
+        <p class="image-note">Photo of the school campus.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="main-footer">
+    <p>Don Jose M. Ynares Sr. Memorial National High School &bull; Library Management System Prototype</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
